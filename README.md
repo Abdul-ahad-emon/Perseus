@@ -1,8 +1,7 @@
 <div align="center">
 
-# Numerical Methods
-
-## Group Assignment – CSE261.2
+# Numerical Methods – CSE261.2
+# Group Assignment
 
 </div>
 
@@ -35,12 +34,12 @@ The implementation is done in **C++**, and the project includes:
 
 <div align="center">
 
-# Group Name  
-# Perseus
+# Group Name  - (Perseus)
+
 
 </div>
 
----
+
 
 <div align="center">
 
@@ -82,7 +81,7 @@ The implementation is done in **C++**, and the project includes:
 
 <div align="center">
 
-## Full Report Available On (LaTeX / PDF)
+# Full Report Available On (LaTeX / PDF)
 
 </div>
 
