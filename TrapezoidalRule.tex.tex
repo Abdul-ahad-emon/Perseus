@@ -1,0 +1,128 @@
+\documentclass[12pt]{article}
+
+% -------- Packages --------
+\usepackage[a4paper,margin=1in]{geometry}
+\usepackage{amsmath,amssymb}
+\usepackage{graphicx}
+\usepackage{float}
+
+% -------- Title --------
+\title{Numerical Integration using Composite Trapezoidal Rule}
+\author{Group Perseus}
+\date{\today}
+
+\begin{document}
+
+\maketitle
+
+%==================================================
+
+\section{Numerical Methods}
+
+In this section, we discuss the numerical technique of the composite trapezoidal rule to approximate definite integrals.
+
+%--------------------------------------------------
+
+\subsection{Composite Trapezoidal Rule}
+
+The composite trapezoidal rule approximates the definite integral of a function
+\(f(x)\) over the interval \([a,b]\) by dividing it into \(n\) subintervals
+and applying the trapezoidal rule to each subinterval. The formula is
+
+\[
+T_n = \frac{h}{2}
+\left[
+\text{Sum of first and last ordinates}
++ 2 \times (\text{Sum of intermediate ordinates})
+\right]
+\]
+
+or equivalently,
+
+\[
+T_n = \frac{h}{2}
+\left[
+(y_0 + y_n) + 2(y_1 + y_2 + \cdots + y_{n-1})
+\right]
+\]
+
+where 
+\[
+y_i = f(x_i), \quad x_0 = a, \quad x_n = b
+\]
+
+and 
+\[
+h = \frac{b-a}{n}
+\]
+
+is the width of each subinterval. Here:
+\begin{itemize}
+    \item \(a\) = lower limit of integration
+    \item \(b\) = upper limit of integration
+    \item \(n\) = number of subintervals
+\end{itemize}
+
+%--------------------------------------------------
+
+\subsubsection*{Numerical Example}
+
+Consider the integral
+
+\[
+\int_0^1 \sin x \, dx
+\]
+
+The exact value is
+
+\[
+\int_0^1 \sin x \, dx = 1 - \cos(1) \approx 0.4597
+\]
+
+Let \(n = 5\). Then,
+
+\[
+h = \frac{1-0}{5} = 0.2
+\]
+
+%--------------------------------------------------
+
+\subsubsection*{Tabular Values}
+
+\[
+\begin{array}{|c|c|}
+\hline
+x & \sin(x) \\
+\hline
+0.0 & 0.0000 \\
+0.2 & 0.1987 \\
+0.4 & 0.3894 \\
+0.6 & 0.5646 \\
+0.8 & 0.7174 \\
+1.0 & 0.8415 \\
+\hline
+\end{array}
+\]
+
+%--------------------------------------------------
+
+\subsubsection*{Calculation}
+
+\[
+T_5 = \frac{0.2}{2}
+\left[
+(0 + 0.8415) + 2(0.1987 + 0.3894 + 0.5646 + 0.7174)
+\right]
+\]
+
+\[
+T_5 = 0.4582
+\]
+
+\subsubsection*{Absolute Error}
+
+\[
+\text{Error} = |0.4597 - 0.4582| = 0.0015
+\]
+
+\end{document}
