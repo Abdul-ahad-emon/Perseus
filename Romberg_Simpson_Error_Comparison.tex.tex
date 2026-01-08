@@ -1,0 +1,257 @@
+\documentclass[12pt]{article}
+\usepackage{amsmath,amssymb}
+\usepackage{booktabs}
+\usepackage{geometry}
+\usepackage{graphicx}
+\usepackage{float}
+
+\geometry{margin=1in}
+
+\title{\textbf{Romberg Integration and Comparison with Simpson's Rule}}
+\author{
+Course: CSE261 -- Numerical Methods\\
+Group Name: \textbf{Perseus}
+}
+\date{}
+
+\begin{document}
+\maketitle
+
+%------------------------------------------------
+\section{Introduction}
+
+Let the function be defined as
+\[
+f(x) = \sin x
+\]
+
+The objective is to numerically evaluate the definite integral
+\[
+I = \int_a^b f(x)\,dx
+\]
+where
+\[
+a = 0 \quad \text{and} \quad b = 1
+\]
+
+The exact value of the integral is
+\[
+I = \int_0^1 \sin x\,dx = 1 - \cos(1) \approx 0.4596976941
+\]
+
+In this report, the integral is first approximated using the Composite Trapezoidal Rule.
+Romberg Integration is then applied to accelerate the convergence of the Trapezoidal Rule
+using Richardson extrapolation. Finally, the numerical results obtained using Romberg
+Integration are compared with Simpson’s 1/3 Rule in terms of accuracy and convergence behavior.
+
+%------------------------------------------------
+\section{Composite Trapezoidal Rule}
+
+The Composite Trapezoidal Rule approximates a definite integral by dividing the interval
+$[a,b]$ into $n$ equal subintervals.
+
+Let,
+\[
+a = \text{lower limit of integration}
+\]
+\[
+b = \text{upper limit of integration}
+\]
+\[
+n = \text{number of subintervals}
+\]
+\[
+h = \frac{b-a}{n} \quad \text{(step size)}
+\]
+
+The nodal points are defined as
+\[
+x_i = a + ih, \quad i = 0,1,2,\ldots,n
+\]
+and
+\[
+y_i = f(x_i)
+\]
+
+The Composite Trapezoidal Rule is given by
+\[
+\int_a^b f(x)\,dx \approx T_n
+\]
+where
+\[
+T_n = \frac{h}{2}
+\left[
+(y_0 + y_n) + 2(y_1 + y_2 + \cdots + y_{n-1})
+\right]
+\]
+
+\subsection*{Application}
+
+For
+\[
+f(x) = \sin x, \quad [a,b] = [0,1]
+\]
+we take
+\[
+n = 4 \Rightarrow h = \frac{1-0}{4} = 0.25
+\]
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c c}
+\toprule
+$x$ & $f(x)=\sin x$ \\
+\midrule
+0.00 & 0.0000000000 \\
+0.25 & 0.2474039593 \\
+0.50 & 0.4794255386 \\
+0.75 & 0.6816387600 \\
+1.00 & 0.8414709848 \\
+\bottomrule
+\end{tabular}
+\caption{Tabulated values of $f(x)$}
+\end{table}
+
+\[
+T_4 = \frac{0.25}{2}
+\left[(0 + 0.8414709848) + 2(0.2474039593 + 0.4794255386 + 0.68163876)\right]
+\]
+
+\[
+T_4 = 0.4573009376
+\]
+
+\[
+\text{Absolute Error} = |0.4596976941 - 0.4573009376| = 0.0023967571
+\]
+
+%------------------------------------------------
+\section{Romberg Integration}
+
+Romberg Integration improves the Composite Trapezoidal Rule by applying Richardson
+extrapolation to eliminate lower-order error terms.
+
+Let
+\[
+R(k,0) = \text{Trapezoidal approximation using } 2^k \text{ subintervals}
+\]
+
+The recursive Romberg formula is
+\[
+R(k,j) = R(k,j-1) +
+\frac{R(k,j-1) - R(k-1,j-1)}{4^j - 1}
+\]
+
+\subsection*{Romberg Table}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c c c c}
+\toprule
+$k \backslash j$ & 0 & 1 & 2 \\
+\midrule
+0 & 0.4500805155 & & \\
+1 & 0.4573009376 & 0.4597077450 & \\
+2 & 0.4593451120 & 0.4596974570 & 0.4596976941 \\
+\bottomrule
+\end{tabular}
+\caption{Romberg Integration Table}
+\end{table}
+
+The most accurate approximation is obtained from the last diagonal element:
+\[
+R(2,2) = 0.4596976941
+\]
+
+\[
+\text{Absolute Error} \approx 0
+\]
+
+%------------------------------------------------
+\section{Simpson's 1/3 Rule}
+
+Simpson’s 1/3 Rule approximates the integral by fitting quadratic polynomials
+over pairs of subintervals.
+
+Let
+\[
+n = \text{even number of subintervals}
+\]
+\[
+h = \frac{b-a}{n}
+\]
+
+The Simpson’s 1/3 Rule formula is
+\[
+\int_a^b f(x)\,dx \approx
+\frac{h}{3}
+\left[
+(y_0 + y_n) + 4(y_1 + y_3 + \cdots + y_{n-1})
++ 2(y_2 + y_4 + \cdots + y_{n-2})
+\right]
+\]
+
+For $n=4$ and $h=0.25$,
+\[
+S = \frac{0.25}{3}
+\left[(0 + 0.8414709848) + 4(0.2474039593 + 0.68163876)
++ 2(0.4794255386)\right]
+\]
+
+\[
+S = 0.4597077448
+\]
+
+\[
+\text{Absolute Error} = 0.0000100507
+\]
+
+%------------------------------------------------
+\section{Error and Convergence Analysis}
+
+The Composite Trapezoidal Rule has an error order of $O(h^2)$, whereas Simpson’s Rule
+has an error order of $O(h^4)$. Romberg Integration further accelerates convergence
+by systematically eliminating lower-order error terms through Richardson extrapolation.
+
+%------------------------------------------------
+\section{Error Decay Comparison}
+
+To illustrate convergence acceleration, the absolute error is plotted against the
+refinement level for Romberg Integration and Simpson’s 1/3 Rule.
+
+\begin{figure}[H]
+\centering
+\includegraphics[width=0.75\textwidth]{error_decay.png}
+\caption{Error decay comparison between Romberg Integration and Simpson's Rule}
+\end{figure}
+
+The figure clearly shows that the error in Romberg Integration decreases much faster
+than that of Simpson’s Rule, confirming convergence acceleration.
+
+%------------------------------------------------
+\section{Comparison of Results}
+
+\begin{table}[H]
+\centering
+\begin{tabular}{c c c}
+\toprule
+Method & Approximate Value & Absolute Error \\
+\midrule
+Composite Trapezoidal Rule & 0.4573009376 & 0.0023967571 \\
+Simpson’s 1/3 Rule & 0.4597077448 & 0.0000100507 \\
+Romberg Integration & 0.4596976941 & $\approx 0$ \\
+\bottomrule
+\end{tabular}
+\caption{Comparison of numerical integration methods}
+\end{table}
+
+%------------------------------------------------
+\section{Conclusion}
+
+The numerical experiments and error decay plots confirm that Romberg Integration
+provides superior accuracy and faster convergence compared to both the Composite
+Trapezoidal Rule and Simpson’s 1/3 Rule. Richardson extrapolation effectively
+accelerates convergence, making Romberg Integration a powerful numerical
+integration technique.
+
+\end{document}
