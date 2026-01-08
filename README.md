@@ -86,7 +86,16 @@ The implementation is done in **C++**, and the project includes:
 </div>
 
 **Report Link:**  
-👉 **[https://www.overleaf.com/read/kjsprkkngcnr#f9c6e1]**  
+👉 **[https://www.overleaf.com/read/kjsprkkngcnr#f9c6e1]** 
+
+# Numerical Integration Assignment - Group Perseus
+
+This repository contains the LaTeX file for the Composite Trapezoidal Rule assignment.
+
+- File: `TrapezoidalRule.tex`
+- Developed by: Group Perseus
+- Submitted via GitHub
+
 
 
 ---
