@@ -97,5 +97,14 @@ This repository contains the LaTeX file for the Composite Trapezoidal Rule assig
 - Submitted via GitHub
 
 
+# Romberg Integration
+
+C++ implementation of Romberg Integration and comparison with Simpson's Rule.
+
+## Build
+
+```bash
+g++ main.cpp src/*.cpp analysis/*.cpp -Iinclude -o romberg
+./romberg
 
 ---
