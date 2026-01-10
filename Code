@@ -1,1 +1,35 @@
+/* =====================================================
+   1. Omi
+===================================================== */
+
+#include <iostream>
+#include <cmath>
+#include <vector>
+#include <iomanip>
+#include <fstream>
+
+using namespace std;
+
+/* =====================================================
+   Task: Test function definition
+===================================================== */
+double f(double x)
+{
+    return sin(x);
+}
+
+/* =====================================================
+   2. Prottay
+   Task: Composite Trapezoidal Rule implementation
+===================================================== */
+double trapezoidal(double a, double b, int n)
+{
+    double h = (b - a) / n;
+    double sum = 0.5 * (f(a) + f(b));
+
+    for (int i = 1; i < n; i++)
+        sum += f(a + i * h);
+
+    return sum * h;
+}
 
