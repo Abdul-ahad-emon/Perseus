@@ -76,5 +76,13 @@ vector<vector<double>> romberg(double a, double b, int maxLevel)
     }
     return R;
 }
- 
+/* =====================================================
+   5. Nurjahan Khanom Mim
+   Task: Exact solution & error computation logic
+===================================================== */
+double exactValue()
+{
+    return 1.0 - cos(1.0);
+}
+
 
